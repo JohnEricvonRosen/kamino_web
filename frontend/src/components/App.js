@@ -7,6 +7,7 @@ import Home from "./Home/Home"
 import Contact from "./Contact/Contact"
 import Login from "./Login/Login"
 import Logout from "./Login/Logout"
+import Zach from "./Zach/Zach"
 
 function App () {
     return (
@@ -18,6 +19,7 @@ function App () {
                 <Route path="/contact" component={Contact}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/logout" component={Logout}/>
+                <Route path="/zach" component={Zach}/>
             </Switch>
         </Router>
     )

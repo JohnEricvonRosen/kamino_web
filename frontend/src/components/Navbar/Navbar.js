@@ -8,7 +8,7 @@ function Navbar(){
     return (
         <div className="NavbarItems">
             <Link className="nav-logo" to="/">
-                <h1>Kamino<i className="fa fa-hand-scissors-o fa-rotate-90"/></h1>
+                <h1>Kamino<i className="fa fa-hand-scissors-o fa-spin"/></h1>
             </Link>
             <nav>
                 <ul className="nav-menu">

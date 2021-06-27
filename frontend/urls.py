@@ -6,6 +6,7 @@ urls = ['',
     'contact', 
     'login', 
     'logout',
+    'zach'
 ]
 
 urlpatterns = [path(x, index) for x in urls]
