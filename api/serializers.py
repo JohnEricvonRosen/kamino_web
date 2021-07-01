@@ -1,9 +1,21 @@
+from django.db.models import fields
 from rest_framework import serializers
-from .models import Account
+from instaaccount.models import InstaAccount, InstaUser
 
-class AccountSerializer(serializers.ModelSerializer):
+class InstaUserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Account
+        model = InstaUser
+        fields = (
+            'id', 
+            'username',
+            'interacted',
+            'dateCollected',
+            'dateInteracted',
+        )
+
+class InstaAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InstaAccount
         fields = (
             'id',
             'username', 

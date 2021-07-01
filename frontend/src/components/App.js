@@ -2,6 +2,7 @@ import React from "react"
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom"
 
 import Navbar from "./Navbar/Navbar"
+import Footer from "./Footer/Footer"
 import About from "./About/About"
 import Home from "./Home/Home"
 import Contact from "./Contact/Contact"
@@ -21,6 +22,7 @@ function App () {
                 <Route path="/logout" component={Logout}/>
                 <Route path="/zach" component={Zach}/>
             </Switch>
+            <Footer/>
         </Router>
     )
 }

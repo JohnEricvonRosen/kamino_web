@@ -4,6 +4,8 @@ import { Link } from "react-router-dom"
 import { MenuItems } from "./MenuItems"
 import LoginButton from "./LoginButton"
 
+import css from "../../../static/css/Navbar.css"
+
 function Navbar(){
     return (
         <div className="NavbarItems">
