@@ -8,10 +8,11 @@ function Zach() {
 
     useEffect (() => { //ComponentDidMount
         setLoading(true)
-        const apiURL = "http://127.0.0.1:8000/api/2"
+        const apiURL = "http://127.0.0.1:8000/api/1"
         fetch(apiURL)
             .then((r) => r.json())
             .then((response) => {
+                console.log(response)
                 setData(response)
                 setLoading(false)
             })

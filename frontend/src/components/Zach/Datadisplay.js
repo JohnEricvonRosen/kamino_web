@@ -4,8 +4,8 @@ function Datadisplay(props) {
     return(
         <div>
             <ul>
-                {Object.keys(props.data).map((item) => {
-                    return (<li>{item}: {props.data[item]}</li>)
+                {Object.keys(props.data).map((item, index) => {
+                    return (<li key={index}>{item}: {props.data[item]}</li>)
                 })}
             </ul>
         </div>

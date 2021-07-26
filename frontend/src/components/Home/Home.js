@@ -1,11 +1,9 @@
+import { Typography } from "@material-ui/core"
 import React from "react"
 
 function Home() {
     return(
-        <div>
-            <h1>Welcome to Kamino.</h1>
-            <h2>We make you famous on instagram.</h2>
-        </div>
+        <Typography variant="h1" >Hello</Typography>
     )
 }
 

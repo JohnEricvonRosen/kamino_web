@@ -2,11 +2,12 @@ from django.urls import path
 from .views import index
 
 urls = ['', 
-    'about/', 
-    'contact/', 
+    'about/',  
     'login/', 
     'logout/',
-    'zach/'
+    'zach/',
+    'accounts/',
+    'settings/'
 ]
 
 urlpatterns = [path(x, index) for x in urls]
