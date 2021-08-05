@@ -7,7 +7,8 @@ urls = ['',
     'logout/',
     'zach/',
     'accounts/',
-    'settings/'
+    'settings/',
+    'signup/',
 ]
 
 urlpatterns = [path(x, index) for x in urls]

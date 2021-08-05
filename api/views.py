@@ -11,7 +11,8 @@ class InstaUserSingleView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = InstaUserSerializer
 
 class InstaAccountListView(generics.ListCreateAPIView):
-    queryset = InstaAccount.objects.all()
+    def get_queryset(self):
+        return InstaAccount.objects.filter(kaminousername_id=self.request.user.id)
     serializer_class = InstaAccountSerializer
 
 class InstaAccountSingleView(generics.RetrieveUpdateDestroyAPIView):

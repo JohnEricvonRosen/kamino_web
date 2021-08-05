@@ -10,13 +10,13 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import { IconButton, InputAdornment } from "@material-ui/core";
+import { InputAdornment } from "@material-ui/core";
 
 
 function Copyright() {
@@ -39,9 +39,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  eye:{
-      cursor: "pointer"
-  },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
@@ -55,46 +52,47 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Login() {
+function Signup() {
+  const history = useHistory();
   const classes = useStyles();
-  const history = useHistory()
-
-  const [showPassword, setShowPassword] = useState(false)
-  const handleTogglePassword = () => setShowPassword(!showPassword)
-
   const initialFormData = Object.freeze({
-      username: '',
-      password: ''
+    firstname: '',
+    lastname: '',
+    username: '',
+    email: '',
+    password1:'',
+    password2:''
   })
 
   const [formData, updateFormData] = useState(initialFormData)
 
   const handleChange = (e) => {
-      updateFormData({
-          ...formData,
-          [e.target.name]: e.target.value.trim(),
-      })
+    updateFormData({
+      ...formData,
+      [e.target.name]: e.target.value.trim(),
+    })
   }
 
   const handleSubmit = (e) => {
-      e.preventDefault()
-
-      axiosInstance
-        .post('token/', {
-            username: formData.username,
-            password: formData.password,
-        })
-        .then((res) => {
-            localStorage.setItem('access_token', res.data.access)
-            localStorage.setItem('refresh_token', res.data.refresh)
-        }).then(() => {
-            axiosInstance.defaults.headers['Authorization'] = 
-                'Bearer ' + localStorage.getItem('access_token')
-        }).then(() => {
-          history.push('/accounts')
-        })
-
-      
+    e.preventDefault()
+    console.log(formData)
+    if (formData.password1 != formData.password2) {
+      console.log("passwords don't match")
+    } else{
+    axiosInstance
+      .post('user/register/', {
+        firstname: formData.firstname,
+        lastname: formData.lastname,
+        email: formData.email,
+        username: formData.username,
+        password: formData.password1
+      })
+      .then((res) => {
+        history.push('/login')
+        console.log(res)
+        console.log(res.data)
+      })
+    }
   }
 
   return (
@@ -102,13 +100,38 @@ function Login() {
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+          <AccountCircleIcon/>
         </Avatar>
         <Typography component="h1" variant="h5">
-          Login
+          Sign up
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                autoComplete="given-name"
+                name="firstname"
+                variant="outlined"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                autoFocus
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastname"
+                autoComplete="family-name"
+                onChange={handleChange}
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -126,29 +149,43 @@ function Login() {
                 variant="outlined"
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type={showPassword ? "text" : "password"}
-                id="password"
-                autoComplete="current-password"
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
                 onChange={handleChange}
-                InputProps={
-                    {
-                        endAdornment: (
-                            <InputAdornment position="end" onClick={handleTogglePassword} className={classes.eye}>
-                                <IconButton>
-                                {showPassword ? <VisibilityIcon/> : <VisibilityOffIcon/>}
-                                </IconButton>
-                            </InputAdornment>
-                        )
-                    }
-                }
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password1"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="new-password"
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password2"
+                label="Repeat Password"
+                type="password"
+                id="password2"
+                autoComplete="new-password"
+                onChange={handleChange}
               />
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="stayLoggedIn" color="primary" />}
-                label="Stay logged in."
+                control={<Checkbox value="allowExtraEmails" color="primary" />}
+                label="I want to receive inspiration, marketing promotions and updates via email."
               />
             </Grid>
           </Grid>
@@ -160,12 +197,12 @@ function Login() {
             className={classes.submit}
             onClick={handleSubmit}
           >
-            Login
+            Sign Up
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="http://127.0.0.1:8000/signup" variant="body2">
-                Don't have an account yet? Sign Up
+              <Link href="http://127.0.0.1:8000/login" variant="body2">
+                Already have an account? Login
               </Link>
             </Grid>
           </Grid>
@@ -178,4 +215,4 @@ function Login() {
   );
 }
 
-export default Login
+export default Signup

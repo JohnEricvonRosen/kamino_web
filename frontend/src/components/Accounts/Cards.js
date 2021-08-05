@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     },
  });
 
-function Cards() {
+function Cards(props) {
     const classes = useStyles();
     return (
         <Card className={classes.root}>
@@ -29,10 +29,10 @@ function Cards() {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
-                InstaAccount
+                {props.account["username"]}
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                This is an instagram Account. pen15 XD
+                {props.account["hashtags"].map((item) => {return(item + " ")})}
               </Typography>
             </CardContent>
           </CardActionArea>

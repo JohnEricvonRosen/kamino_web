@@ -3,6 +3,7 @@ import {BrowserRouter as Router} from "react-router-dom"
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import NavDrawer from './Navigation/NavDrawer'
+import NavSwipeableDrawer from "./Navigation/NavSwipeableDrawer";
 
 import { Switch, Route } from "react-router-dom"
 
@@ -12,6 +13,7 @@ import Login from "./Login/Login"
 import Logout from "./Login/Logout"
 import Zach from "./Zach/Zach"
 import Accounts from "./Accounts/Accounts"
+import Signup from "./Login/Signup"
 
 const content = (
     <Switch>
@@ -21,6 +23,7 @@ const content = (
         <Route path="/login" component={Login}/>
         <Route path="/logout" component={Logout}/>
         <Route path="/zach" component={Zach}/>
+        <Route path="/signup" component={Signup}/>
     </Switch>
 )
 
@@ -34,6 +37,7 @@ function App () {
     return (
         <ThemeProvider theme={theme}>
             <Router>
+                {/* <NavSwipeableDrawer/> */}
                 <NavDrawer content={content}/>
             </Router>
         </ThemeProvider>

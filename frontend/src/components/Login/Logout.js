@@ -1,8 +1,22 @@
-import React from "react"
+import React, { useEffect } from "react"
+import axiosInstance from "../axios"
+import { useHistory } from "react-router"
+import { Typography } from "@material-ui/core"
 
-function Logout(){
+const Logout = () => {
+    const history = useHistory()
+
+    useEffect(() => {
+        const response = axiosInstance.post('user/logout/blacklist/', {
+            refresh_token: localStorage.getItem('refresh_token'),
+        })
+        localStorage.removeItem('access_token')
+        localStorage.removeItem('refresh_token')
+        axiosInstance.defaults.headers['Authorization'] = null
+        history.push('/')
+    })
     return(
-        <h1>This is the logout page</h1>
+        <Typography>Logging Out...</Typography>
     )
 }
 
