@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,6 +19,7 @@ import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom';
 
 import { AnonItmes, UserItems } from './MenuItems';
+import ProfileMenu from './ProfileMenu';
 
 const drawerWidth = 240;
 
@@ -85,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
 export default function NavDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -104,7 +105,7 @@ export default function NavDrawer(props) {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar className={classes.test2}>
+        <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -121,9 +122,11 @@ export default function NavDrawer(props) {
             </Typography>
           </Link>  
           <div className={classes.spacer}/>
-          <Link to="/login" style={{textDecoration: 'none', color: 'inherit'}}>
+          {props.auth ?
+          <ProfileMenu/>
+          : <Link to="/login" style={{textDecoration: 'none', color: 'inherit'}}>
             <Button color="inherit">Login</Button>
-          </Link>
+          </Link>}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -151,6 +154,7 @@ export default function NavDrawer(props) {
             </Link>
           ))}
         </List>
+        {props.auth && <React.Fragment>
         <Divider />
         {UserItems.map((item, index) => (
             <Link to={item.itemURL} key={index}style={{textDecoration: 'none', color: 'inherit'}}>
@@ -159,7 +163,8 @@ export default function NavDrawer(props) {
                 <ListItemText primary={item.itemName} />
               </ListItem>
             </Link>
-          ))}
+        ))}
+      </React.Fragment>}
       </Drawer>
       <main
         className={clsx(classes.content, {

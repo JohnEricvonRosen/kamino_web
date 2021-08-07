@@ -23,14 +23,14 @@ function Copyright() {
     return (
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
+        <Link color="inherit">
           Kamino
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}
       </Typography>
     );
-  }
+}
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Login() {
+function Login(props) {
   const classes = useStyles();
   const history = useHistory()
 
@@ -85,16 +85,18 @@ function Login() {
             password: formData.password,
         })
         .then((res) => {
+            if (res.data["detail"] == "No active account found with the given credentials") {
+              console.log("Please Verify Account")
+            }
             localStorage.setItem('access_token', res.data.access)
             localStorage.setItem('refresh_token', res.data.refresh)
         }).then(() => {
             axiosInstance.defaults.headers['Authorization'] = 
-                'Bearer ' + localStorage.getItem('access_token')
+                'JWT ' + localStorage.getItem('access_token')
         }).then(() => {
           history.push('/accounts')
-        })
-
-      
+          props.setAuth(true)
+        })      
   }
 
   return (
@@ -119,6 +121,7 @@ function Login() {
                 name="username"
                 autoComplete="username"
                 onChange={handleChange}
+                autoFocus
               />
             </Grid>
             <Grid item xs={12}>

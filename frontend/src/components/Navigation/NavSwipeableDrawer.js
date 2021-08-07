@@ -12,10 +12,10 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Divider from '@material-ui/core/Divider';
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from '@material-ui/icons/Menu';
-
-
+import Typography from "@material-ui/core/Typography";
 import { AnonItmes, UserItems } from './MenuItems';
-import { Typography } from "@material-ui/core";
+
+const drawerWidth = 240;
 
 const useStyles = makeStyles(() => ({
     root: {
@@ -30,6 +30,7 @@ function NavSwipeableDrawer (){
     const [isOpen, setOpen] = useState(false)
     const classes= useStyles()
 
+    
 
     return(
         <div className={classes.root}>

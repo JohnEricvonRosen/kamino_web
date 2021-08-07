@@ -24,7 +24,7 @@ function MediaCard() {
 
   useEffect(() => {
     setLoading(true)
-    axiosInstance.get('')
+    axiosInstance.get('/accounts/')
       // .then((r) => r.json())
       .then((response) => {
         setData(response['data'])
