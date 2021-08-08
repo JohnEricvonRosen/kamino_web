@@ -11,6 +11,7 @@ import Logout from "./Login/Logout"
 import Zach from "./Zach/Zach"
 import Accounts from "./Accounts/Accounts"
 import Signup from "./Login/Signup"
+import Footer from "./Footer/Footer"
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -19,6 +20,14 @@ const useStyles = makeStyles((theme) => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing(3),
+        marginBottom:theme.spacing(8),
+    },
+    header: {
+        flexGrow: 1,
+        padding: theme.spacing(3),
+    },
+    footer: {
+        flexGrow: 1,
     },
 }))
 
@@ -41,7 +50,7 @@ function App () {
     return (
         <ThemeProvider theme={theme}>
             <Router className={classes.container}>
-                <div className={classes.content}>
+                <div className={classes.header}>
                     <Swipeable auth={isAuthenticated}/>
                 </div>
                 <div className={classes.content}>
@@ -55,6 +64,7 @@ function App () {
                         <Route path="/signup" component={Signup}/>
                     </Switch>
                 </div>
+                <Footer className={classes.footer}/>
             </Router>
         </ThemeProvider>
     )

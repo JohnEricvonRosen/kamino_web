@@ -25,7 +25,7 @@ SECRET_KEY = '2wm1dmi!rw55#%@j86dadqmjipda^l@5eg1&6@-r^m*er1v49-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.178.37']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.178.30', 's5apy7fezi939toh.myfritz.net']
 
 # Application definition
 
@@ -43,11 +43,13 @@ INSTALLED_APPS = [
     'frontend.apps.FrontendConfig',
     'kaminouser',
     'rest_framework_simplejwt.token_blacklist',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -164,3 +166,9 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://192.168.178.30:8000",
+    "http://127.0.0.1:9000",
+    "http://s5apy7fezi939toh.myfritz.net:8000"
+]

@@ -166,6 +166,11 @@ function Login(props) {
             Login
           </Button>
           <Grid container justifyContent="flex-end">
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                Forgot password?
+              </Link>
+            </Grid>
             <Grid item>
               <Link href="http://127.0.0.1:8000/signup" variant="body2">
                 Don't have an account yet? Sign Up

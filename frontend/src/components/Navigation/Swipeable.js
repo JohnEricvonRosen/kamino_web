@@ -20,7 +20,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { Link } from "react-router-dom"
 import { AnonItmes, UserItems } from './MenuItems';
 
-const useStyles = makeStyles({
+const drawerwidth = 180;
+
+const useStyles = makeStyles((theme) => ({
   appBar:{
     display: "flex",
     justifyContent: "space-between"
@@ -29,7 +31,7 @@ const useStyles = makeStyles({
     flexGrow: 1
   },
   list: {
-    width: 250,
+    width: drawerwidth,
   },
   fullList: {
     width: 'auto',
@@ -40,7 +42,11 @@ const useStyles = makeStyles({
   drawerContent: {
     flexGrow: 1,
   },
-});
+  closer: {
+    flexGrow: 1,
+    marginLeft: drawerwidth - theme.spacing(6)
+  },
+}));
 
 export default function SwipeabeDrawer(props) {
   const classes = useStyles();
@@ -91,7 +97,7 @@ export default function SwipeabeDrawer(props) {
           <div>
           <IconButton 
             onClick={toggleDrawer(false)} 
-            className={classes.drawerContent}
+            className={classes.closer}
             >
             <ChevronLeftIcon/>
           </IconButton> 
