@@ -1,7 +1,7 @@
 import React, { useEffect } from "react"
 import axiosInstance from "../axios"
 import { useHistory } from "react-router"
-import { Typography } from "@material-ui/core"
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const Logout = (props) => {
     const history = useHistory()
@@ -17,7 +17,7 @@ const Logout = (props) => {
         props.setAuth(false)
     })
     return(
-        <Typography>Logging Out...</Typography>
+        <CircularProgress/>
     )
 }
 

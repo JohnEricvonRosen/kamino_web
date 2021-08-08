@@ -3,6 +3,7 @@ import {BrowserRouter as Router} from "react-router-dom"
 import { createTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import Swipeable from "./Navigation/Swipeable"
 import { Switch, Route } from "react-router-dom"
+import homeURL from "./homeURL";
 
 import Home from './Home/Home'
 import About from "./About/About"
@@ -12,6 +13,7 @@ import Zach from "./Zach/Zach"
 import Accounts from "./Accounts/Accounts"
 import Signup from "./Login/Signup"
 import Footer from "./Footer/Footer"
+import AddAccount from "./Accounts/AddAccount";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -58,10 +60,11 @@ function App () {
                         <Route path="/" exact component={Home}/>
                         <Route path="/about" component={About}/>
                         <Route path="/accounts" component={Accounts}/>
-                        <Route path="/login" component={() => <Login auth={isAuthenticated} setAuth={setAuthenticated}/>}/>
+                        <Route path="/login" component={() => <Login auth={isAuthenticated} setAuth={setAuthenticated} homeURL={homeURL}/>}/>
                         <Route path="/logout" component={() => <Logout auth={isAuthenticated} setAuth={setAuthenticated}/>}/>
                         <Route path="/zach" component={Zach}/>
-                        <Route path="/signup" component={Signup}/>
+                        <Route path="/signup" component={() => <Signup homeURL={homeURL}/>}/>
+                        <Route path="/addaccount" component={AddAccount}/>
                     </Switch>
                 </div>
                 <Footer className={classes.footer}/>

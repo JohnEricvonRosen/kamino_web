@@ -14,10 +14,6 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import VisibilityIcon from '@material-ui/icons/Visibility';
-import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import { InputAdornment } from "@material-ui/core";
-
 
 function Copyright() {
     return (
@@ -52,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Signup() {
+function Signup(props) {
   const history = useHistory();
   const classes = useStyles();
   const initialFormData = Object.freeze({
@@ -201,7 +197,7 @@ function Signup() {
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link href="http://127.0.0.1:8000/login" variant="body2">
+              <Link href={props.homeURL + "/login"} variant="body2">
                 Already have an account? Login
               </Link>
             </Grid>

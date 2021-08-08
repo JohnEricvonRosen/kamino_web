@@ -6,9 +6,9 @@ import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 import { useHistory } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Cards from './Cards';
-import { Typography } from '@material-ui/core';
 import axiosInstance from '../axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +44,6 @@ function Accounts() {
   }, [])
   return (
     <div className={classes.root}>
-      {loading ? <Typography variant="h1" component="h1">Loading</Typography> :
         <Grid 
           container 
           spacing={5}
@@ -52,14 +51,18 @@ function Accounts() {
           justifyContent="center"
           alignItems="flex-start"
           >
+          {loading ? <Grid item><CircularProgress/></Grid>:
+          <React.Fragment>
           {data.map((account, index) => {
             return (<Grid item key={index} xs={2} className={classes.items}>
               <Cards account={account}/>
             </Grid>
             )})
+
           }
-      </Grid>
+          </React.Fragment>
     }
+      </Grid>
   <Tooltip title="Add" aria-label="add">
   <Fab onClick={()=>history.push('/addaccount')} color="secondary" className={classes.add}>
     <AddIcon />

@@ -172,7 +172,7 @@ function Login(props) {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="http://127.0.0.1:8000/signup" variant="body2">
+              <Link href={props.homeURL + "/signup"} variant="body2">
                 Don't have an account yet? Sign Up
               </Link>
             </Grid>

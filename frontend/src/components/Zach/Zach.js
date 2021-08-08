@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react" 
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Datadisplay from "./Datadisplay"
 
@@ -20,7 +21,7 @@ function Zach() {
     
     return(
         <div>
-            {loading ? <h1>Loading</h1> : <Datadisplay data={data}/>}
+            {loading ? <CircularProgress/>: <Datadisplay data={data}/>}
             <h2>Gnome-shaped dildo store: </h2>
             <p>Doesn't look like it should work, but it do.</p>
             <label>Gnome's finest dildo</label>

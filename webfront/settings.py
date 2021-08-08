@@ -169,6 +169,5 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     "http://192.168.178.30:8000",
-    "http://127.0.0.1:9000",
     "http://s5apy7fezi939toh.myfritz.net:8000"
 ]
