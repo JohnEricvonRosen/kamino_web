@@ -33,31 +33,47 @@ const useStyles = makeStyles((theme) => ({
 
 function Hashtags(props) {
     const classes = useStyles()
+    const [tags, updateTags] = useState([0,])
+    const [counter, updateCounter] = useState(0)
   
-    const rmHashtag = () => {
-        console.log("RM")
+    const rmHashtag = (tag) => {
+        const rmTag = [...tags]
+        const index = rmTag.indexOf(tag)
+        if (index > -1){
+            rmTag.splice(index, 1)
+            updateTags(rmTag)
+        }
     }
-      
+    
     const addHashtag = () => {
-          console.log("ADD")
+        const addTag = [...tags]
+        const incCounter = counter + 1
+        addTag.push(incCounter) 
+        updateTags(addTag)
+        updateCounter(incCounter)
+        console.log("ADD")
     }
 
     return (
         <React.Fragment>
-            <Grid item xs={12}> 
-                <TextField
-                    label="Hahshtag"
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton onClick={rmHashtag}>
-                                    <DeleteIcon />
-                                </IconButton>
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-            </Grid>
+            {tags.map((tag) => {
+                return (
+                    <Grid item xs={12} key={tag}> 
+                        <TextField
+                            label="Hahshtag"
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <IconButton onClick={() => rmHashtag(tag)}>
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Grid>
+                )
+            })}
             <Grid item xs={12}>
                 <Link className={classes.add} onClick={addHashtag}>
                     <Typography>
