@@ -17,21 +17,20 @@ import AddAccount from "./Accounts/AddAccount";
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        display: "flex",
+        minHeight: '100vh',
+        position: 'relative',
     },
     content: {
-        flexGrow: 1,
+        minHeight: window.innerHeight - theme.spacing(15),
         padding: theme.spacing(3),
-        marginBottom:theme.spacing(8),
-        minHeight: '100%',
-        paddingBottom: theme.spacing(8)
     },
     header: {
-        flexGrow: 1,
         padding: theme.spacing(3),
     },
     footer: {
-        flexGrow: 1,
+        position: 'absolute',
+        bottom: 0,
+        height: theme.spacing(8)
     },
 }))
 
@@ -58,7 +57,7 @@ function App () {
                     <Swipeable auth={isAuthenticated}/>
                 </div>
                 <div className={classes.content}>
-                    <Switch className={classes.content}>
+                    <Switch>
                         <Route path="/" exact component={Home}/>
                         <Route path="/about" component={About}/>
                         <Route path="/accounts" component={Accounts}/>

@@ -20,21 +20,8 @@ function Copyright() {
 
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-  },
-  main: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
-  },
   footer: {
     padding: theme.spacing(3, 2),
-    position: 'fixed',
-    bottom: 0,
-    left: 0,
-    right: 0,
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
   },
