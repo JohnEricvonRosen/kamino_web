@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
         flexGrow: 1,
         padding: theme.spacing(3),
         marginBottom:theme.spacing(8),
+        minHeight: '100vh',
     },
     header: {
         flexGrow: 1,
