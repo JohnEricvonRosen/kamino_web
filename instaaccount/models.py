@@ -16,7 +16,6 @@ class InstaAccount(models.Model):
     
     kaminousername = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     username = CharField(max_length=150, unique=True)
-    password = CharField(max_length=50)
     
     slug = models.SlugField(max_length=150, blank=True)
 
@@ -31,7 +30,6 @@ class InstaAccount(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.username)
-        self.password = hashers.make_password(self.password)
         
         super().save(*args, **kwargs)
 

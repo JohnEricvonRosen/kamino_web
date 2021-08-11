@@ -7,8 +7,8 @@ class InstaAccountSerializer(serializers.ModelSerializer):
         model = InstaAccount
         fields = (
             'id',
+            'kaminousername',
             'username', 
-            'password', 
             'dateCreated', 
             'hashtags', 
         )

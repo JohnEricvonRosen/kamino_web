@@ -42,16 +42,8 @@ const useStyles = makeStyles((theme) => ({
 function AddAccount() {
   const history = useHistory();
   const classes = useStyles();
-  const initialFormData = Object.freeze({
-    firstname: '',
-    lastname: '',
-    username: '',
-    email: '',
-    password1:'',
-    password2:''
-  })
 
-  const [formData, updateFormData] = useState(initialFormData)
+  const [formData, updateFormData] = useState({username: '',})
   const [isSubmitable, updateisSubmitable] = useState(false)
 
   const handleChange = (e) => {
@@ -67,25 +59,34 @@ function AddAccount() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formData)
-    // if (formData.password1 != formData.password2) {
-    //   console.log("passwords don't match")
-    // } else{
-    // axiosInstance
-    //   .post('user/register/', {
-    //     firstname: formData.firstname,
-    //     lastname: formData.lastname,
-    //     email: formData.email,
-    //     username: formData.username,
-    //     password: formData.password1
-    //   })
-    //   .then((res) => {
-    //     history.push('/login')
-    //     console.log(res)
-    //     console.log(res.data)
-    //   })
-    // }
+
+    
+    var hashtags = []
+    var subForm={...formData}
+    var keys = Object.keys(subForm)
+    keys.splice('username', 1)
+
+    for (let i=0; i<keys.length; i++){    
+      hashtags.push(subForm[keys[i]])
+      delete subForm[keys[i]]
+      
+    }
+
+    subForm['hashtags'] = hashtags
+    console.log('final', subForm)
+
+    axiosInstance
+      .post('accounts/', {
+        username: subForm['username'],
+        hashtags: subForm['hashtags']
+      })
+      .then((res) => {
+        history.push('/accounts')
+        console.log(res)
+        console.log(res.data)
+      })
   }
+
 
   return (
     <Container component="main" maxWidth="xs">
@@ -111,7 +112,7 @@ function AddAccount() {
                 onChange={handleChange}
               />
             </Grid>
-            <Hashtags/>
+            <Hashtags formData={formData} updateFormData={updateFormData} handleChange={handleChange}/>
           </Grid>
           <Button
             disabled={isSubmitable}

@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Hashtags(props) {
     const classes = useStyles()
-    const [tags, updateTags] = useState([0,])
-    const [counter, updateCounter] = useState(0)
+    const [tags, updateTags] = useState([])
+    const [counter, updateCounter] = useState(-1)
   
     const rmHashtag = (tag) => {
         const rmTag = [...tags]
@@ -43,6 +43,9 @@ function Hashtags(props) {
             rmTag.splice(index, 1)
             updateTags(rmTag)
         }
+        const prevForm = {...props.formData}
+        delete prevForm['h-'+tag]
+        props.updateFormData(prevForm)
     }
     
     const addHashtag = () => {
@@ -51,8 +54,15 @@ function Hashtags(props) {
         addTag.push(incCounter) 
         updateTags(addTag)
         updateCounter(incCounter)
-        console.log("ADD")
+
+        const prevForm = {...props.formData}
+        prevForm['h-' + incCounter] = ""
+        props.updateFormData(prevForm)
     }
+
+    useEffect(() => {
+        addHashtag()
+    }, [])
 
     return (
         <React.Fragment>
@@ -61,6 +71,8 @@ function Hashtags(props) {
                     <Grid item xs={12} key={tag}> 
                         <TextField
                             label="Hahshtag"
+                            name={'h-'+tag}
+                            onChange={props.handleChange}
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
