@@ -16,6 +16,15 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { IconButton } from "@material-ui/core";
 import Hashtags from "./Hashtags";
 
+Object.size = function(obj) {
+  var size = 0,
+    key;
+  for (key in obj) {
+    if (obj.hasOwnProperty(key)) size++;
+  }
+  return size;
+};
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -44,7 +53,6 @@ function AddAccount() {
   const classes = useStyles();
 
   const [formData, updateFormData] = useState({username: '',})
-  const [isSubmitable, updateisSubmitable] = useState(false)
 
   const handleChange = (e) => {
     updateFormData({
@@ -61,19 +69,21 @@ function AddAccount() {
     e.preventDefault()
 
     
-    var hashtags = []
     var subForm={...formData}
     var keys = Object.keys(subForm)
     keys.splice('username', 1)
-
+    
+    var hashtags = []
     for (let i=0; i<keys.length; i++){    
       hashtags.push(subForm[keys[i]])
       delete subForm[keys[i]]
       
     }
 
-    subForm['hashtags'] = hashtags
-    console.log('final', subForm)
+    subForm['hashtags'] = [... new Set(hashtags.filter(function(value, index, arr){
+      return value !== ''
+    }))]
+    console.log('after', subForm['hashtags'])
 
     axiosInstance
       .post('accounts/', {
@@ -82,8 +92,9 @@ function AddAccount() {
       })
       .then((res) => {
         history.push('/accounts')
-        console.log(res)
-        console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
       })
   }
 
@@ -115,7 +126,7 @@ function AddAccount() {
             <Hashtags formData={formData} updateFormData={updateFormData} handleChange={handleChange}/>
           </Grid>
           <Button
-            disabled={isSubmitable}
+            disabled={Object.size(formData) < 2}
             type="submit"
             fullWidth
             variant="contained"
