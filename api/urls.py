@@ -5,5 +5,5 @@ urlpatterns = [
     path('accounts/',            InstaAccountListView.as_view(),     name='listaccounts'),
     path('accounts/<slug:slug>/',   InstaAccountSingleView.as_view(),   name='singleaccount'),
     path('users/',      InstaUserListView.as_view(),        name='listusers'),
-    path('users/<int:pk>/', InstaUserSingleView.as_view(),  name='singleuser')
+    path('users/<int:pk>/', InstaUserSingleView.as_view(),  name='singleuser'),
 ]

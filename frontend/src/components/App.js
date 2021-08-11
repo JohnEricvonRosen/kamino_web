@@ -9,11 +9,12 @@ import Home from './Home/Home'
 import About from "./About/About"
 import Login from "./Login/Login"
 import Logout from "./Login/Logout"
-import Zach from "./Zach/Zach"
+// import Zach from "./Zach/Zach"
 import Accounts from "./Accounts/Accounts"
 import Signup from "./Login/Signup"
 import Footer from "./Footer/Footer"
 import AddAccount from "./Accounts/AddAccount";
+import Instaacount from "./Accounts/Instaaccount";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -60,12 +61,13 @@ function App () {
                     <Switch>
                         <Route path="/" exact component={Home}/>
                         <Route path="/about" component={About}/>
-                        <Route path="/accounts" component={Accounts}/>
+                        <Route path="/accounts" exact component={Accounts}/>
                         <Route path="/login" component={() => <Login auth={isAuthenticated} setAuth={setAuthenticated} homeURL={homeURL}/>}/>
                         <Route path="/logout" component={() => <Logout auth={isAuthenticated} setAuth={setAuthenticated}/>}/>
-                        <Route path="/zach" component={Zach}/>
+                        {/* <Route path="/zach" component={Zach}/> */}
                         <Route path="/signup" component={() => <Signup homeURL={homeURL}/>}/>
                         <Route path="/addaccount" component={AddAccount}/>
+                        <Route path="/accounts/:slug" children={<Instaacount/>}/>
                     </Switch>
                 </div>
                 <Footer className={classes.footer}/>

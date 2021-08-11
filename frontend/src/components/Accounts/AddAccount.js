@@ -12,8 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-import { IconButton } from "@material-ui/core";
 import Hashtags from "./Hashtags";
 
 Object.size = function(obj) {

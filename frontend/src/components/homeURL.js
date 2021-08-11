@@ -1,2 +1,2 @@
-const homeURL = "http://s5apy7fezi939toh.myfritz.net:8000"
+const homeURL = "http://127.0.0.1:8000"
 export default homeURL

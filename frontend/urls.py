@@ -5,11 +5,12 @@ urls = ['',
     'about/',  
     'login/', 
     'logout/',
-    'zach/',
+    # 'zach/',
     'accounts/',
+    'accounts/<slug:slug>/',
     'settings/',
     'signup/',
-    'addaccount',
+    'addaccount/',
 ]
 
 urlpatterns = [path(x, index) for x in urls]

@@ -7,6 +7,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
     root: {
@@ -19,9 +20,10 @@ const useStyles = makeStyles({
 
 function Cards(props) {
     const classes = useStyles();
+    const history = useHistory()
     return (
         <Card className={classes.root}>
-          <CardActionArea onClick={()=>{return 1}}>
+          <CardActionArea onClick={()=>{history.push('/accounts/'+props.account['username'])}}>
             <CardMedia
               className={classes.media}
               image="/static/images/instagram_logo.jpeg"

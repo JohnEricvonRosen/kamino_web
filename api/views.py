@@ -35,6 +35,25 @@ class InstaAccountListView(generics.ListCreateAPIView):
 
 class InstaAccountSingleView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
-    def get_queryset(self):
-        return InstaAccount.objects.filter(kaminousername_id=self.request.user.id)
     serializer_class = InstaAccountSerializer
+    lookup_field = 'slug'
+    def get_object(self):
+        slug = self.kwargs['slug']
+        if slug in InstaAccount.objects.values_list('username', flat=True):
+            obj = InstaAccount.objects.get(username=slug)
+            if self.request.user.id == getattr(obj, 'kaminousername').id:
+                return obj
+                # data={  'id': obj.id,
+                #         'kaminousername': obj.kaminousername_id,
+                #         'username': obj.username, 
+                #         'dateCreated': obj.dateCreated, 
+                #         'hashtags': obj.hashtags, 
+                #     }
+                # serializer = InstaAccountSerializer(data=data)
+                # if serializer.is_valid():
+                #     serializer.save()
+                #     return Response(data=serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response('No Access.', status=status.HTTP_401_UNAUTHORIZED)
+        else:
+            return Response('Account doesn\'t exist', status=status.HTTP_204_NO_CONTENT)

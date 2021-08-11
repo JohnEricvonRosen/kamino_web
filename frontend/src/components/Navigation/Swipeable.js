@@ -79,8 +79,8 @@ export default function SwipeabeDrawer(props) {
                 <Typography variant="h3" className={classes.appBarContent}>
                     Kamino
                 </Typography>
-                {props.auth ?
-                    <ProfileMenu className={classes.appBarContent}/>
+                {props.auth 
+                    ? <ProfileMenu className={classes.appBarContent}/>
                     : <Link to="/login" style={{textDecoration: 'none', color: 'inherit'}}>
                         <Button color="inherit">Login</Button>
                     </Link>}

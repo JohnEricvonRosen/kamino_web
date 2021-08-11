@@ -21,12 +21,12 @@ export const AnonItmes = [
         itemIcon: <InfoIcon/>,
         itemHidden: false
     },
-    {
-        itemName: "Zach",
-        itemURL: "/zach",
-        itemIcon: <SentimentVerySatisfiedIcon/>,
-        itemHidden: true
-    }
+    // {
+    //     itemName: "Zach",
+    //     itemURL: "/zach",
+    //     itemIcon: <SentimentVerySatisfiedIcon/>,
+    //     itemHidden: true
+    // }
 ]
 
 export const UserItems =[

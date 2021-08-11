@@ -35,6 +35,9 @@ class InstaAccount(models.Model):
 
     def get_absolute_url(self):
         return reverse(kwargs={'slug': self.slug})
+    
+    def lookup_field(self):
+        return 'slug'
 
 
 
